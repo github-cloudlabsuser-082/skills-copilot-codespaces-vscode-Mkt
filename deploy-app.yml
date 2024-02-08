@@ -1,0 +1,63 @@
+# Create a GitHub action to email a report from a file at 6 a.m. daily
+name: Email Report
+on:
+  schedule:
+    - cron: "0 6 * * *"
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Email Report
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL }}
+          password: ${{ secrets.PASSWORD }}
+          subject: "Daily Report"
+          body: "Please find the daily report attached."
+          to: ${{ secrets.EMAIL }}
+          attachments: deploy-app.yml
+```
+
+## Conclusion
+
+In this lab, you learned how to create a GitHub action to automate the deployment of a web application. You used the GitHub Actions workflow to create a workflow file to build and deploy the application. You also learned how to create a GitHub action to email a report from a file at 6 a.m. daily.
+
+# Lab 3: Using GitHub Actions to Automate Software Development Life Cycle
+
+## Introduction
+
+In this lab, you will learn how to use GitHub Actions to automate the software development life cycle (SDLC). You will create a GitHub Actions workflow to automate the following tasks:
+
+- Building and testing the application
+- Packaging the application
+- Deploying the application
+
+## Prerequisites
+
+- A GitHub account
+- A web application repository
+
+## Lab
+
+### Task 1: Create a GitHub Actions Workflow to Automate the SDLC
+
+1. Navigate to the repository where your web application is located.
+
+2. Click on the **Actions** tab.
+
+3. Click on the **New workflow** button.
+
+4. Select **Set up a workflow yourself**.
+
+5. Replace the content of the file with the following code:
+
+```yaml
+name: Software Development Life Cycle
+on:
+  push:
+    branches: [ main ]
+  pull_request
